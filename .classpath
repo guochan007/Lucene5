@@ -12,6 +12,7 @@
 	<classpathentry kind="lib" path="lib/lucene-queryparser-5.3.1.jar"/>
 	<classpathentry kind="lib" path="lib/IKAnalyzer2015 For Solr5x.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-highlighter-5.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.8-bin.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,4 +1,4 @@
-package lucene5;
+package com.file;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Paths;

@@ -1,4 +1,4 @@
-package lucene5;
+package com.file;
 import java.io.File;
 import java.nio.file.FileSystems;
 import java.util.Date;
@@ -9,7 +9,6 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.queryparser.classic.QueryParser;
@@ -18,7 +17,6 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import com.chenlb.mmseg4j.analysis.ComplexAnalyzer;
 import com.chenlb.mmseg4j.analysis.MMSegAnalyzer;
@@ -33,7 +31,7 @@ import comm.Util;
  */
 
 //索引管理
-public class IndexManagerChineseIKAnalyzer{
+public class IndexManagerChineseMmseg4j{
 //    文件内容
     private static String content="";
 //    放索引目录
@@ -72,7 +70,13 @@ public class IndexManagerChineseIKAnalyzer{
 //            System.out.println("content :"+content);
             
             try{
-            	analyzer = new IKAnalyzer(true);//中文 
+//            	analyzer = new StandardAnalyzer();
+//            	analyzer = new IKAnalyzer();//中文 
+            	
+            	analyzer = new SimpleAnalyzer();//中文 
+//            	analyzer = new MMSegAnalyzer();//中文 
+//            	analyzer = new ComplexAnalyzer();//中文 
+//            	analyzer = new MaxWordAnalyzer();//中文 
             	File indexFile = new File(INDEX_DIR);
             	if (!indexFile.exists()) {
             		indexFile.mkdirs();
@@ -111,21 +115,20 @@ public class IndexManagerChineseIKAnalyzer{
         try{
         	directory = FSDirectory.open(FileSystems.getDefault().getPath(INDEX_DIR));
         	
-        	analyzer = new IKAnalyzer(true);//中文
-//            DirectoryReader directoryReader = DirectoryReader.open(directory);
-        	IndexReader directoryReader = DirectoryReader.open(directory);
-        	IndexSearcher indexSearcher = new IndexSearcher(directoryReader);
+//        	analyzer = new StandardAnalyzer();
+//        	analyzer = new IKAnalyzer();//中文
+        	
+//        	mmseg4j 多种初始化形式
+        	analyzer = new SimpleAnalyzer();//中文 
+//        	analyzer = new MMSegAnalyzer();//中文 
+//        	analyzer = new ComplexAnalyzer();//中文 
+//        	analyzer = new MaxWordAnalyzer();//中文 
+            DirectoryReader directoryReader = DirectoryReader.open(directory);
+            IndexSearcher indexSearcher = new IndexSearcher(directoryReader);
     
 //            QueryParser parser = new QueryParser("fieldname", analyzer);
 //            前面创建索引时，放入了3个标签 "filename" "content" "path" 现在查询时也要对应起来
-            
-            /*
-            String[] fields = { "id", "title" };
-            QueryParser qp = new MultiFieldQueryParser(fields, analyzer);
-            */
-            
             QueryParser parser = new QueryParser("content", analyzer);
-            parser.setDefaultOperator(QueryParser.AND_OPERATOR);
             Query query = parser.parse(text);
             ScoreDoc[] hits = indexSearcher.search(query, null, 1000).scoreDocs;
         
@@ -156,9 +159,9 @@ public class IndexManagerChineseIKAnalyzer{
         }
         createIndex(DATA_DIR);
     	
-//        searchIndex("霍乱");
+        searchIndex("霍乱");
 //        searchIndex("爱情");
 //        searchIndex("阿里萨");
-        searchIndex("KING CLAUDIUS");
+//        searchIndex("KING CLAUDIUS");
     }
 }

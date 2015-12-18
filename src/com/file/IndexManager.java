@@ -1,4 +1,4 @@
-package lucene5;
+package com.file;
 import java.io.File;
 import java.nio.file.FileSystems;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package lucene5;
+package com.file;
 
 import static org.junit.Assert.assertEquals;
 
