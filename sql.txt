@@ -1,0 +1,14 @@
+CREATE TABLE `lucenetest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) DEFAULT NULL,
+  `address` varchar(20) DEFAULT NULL,
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8
+
+
+insert into `lucenetest` (`id`, `username`, `address`) values('1','小张','太原小店恒大绿洲');
+insert into `lucenetest` (`id`, `username`, `address`) values('2','大毛','太原迎泽火车站');
+insert into `lucenetest` (`id`, `username`, `address`) values('3','小李','大同广灵');
+insert into `lucenetest` (`id`, `username`, `address`) values('4','大王','大同广灵');
+insert into `lucenetest` (`id`, `username`, `address`) values('5','习大大','北京中南海');
+
